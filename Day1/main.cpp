@@ -2,14 +2,13 @@
 #include <fstream>
 #include <string>
 
-std::pair<char, int> ParseLine(std::string& currentLine);
+std::pair<char, int> ParseLine(const std::string& currentLine);
 
 int main() {
   // Declare variables to hold values
   int currentNum{50};
-  char nextDirection;
-  int numClicks{0};
   int zeroCounter{0};
+  constexpr int minValue{0};
   constexpr int maxValue{99};
   std::string currentLine;
 
@@ -26,14 +25,14 @@ int main() {
     
     if(nextDirection == 'L') {  // Left decreases number
       currentNum -= numClicks;
-      while(currentNum < 0) {
+      while(currentNum < minValue) {
         currentNum = ((maxValue + 1) - abs(currentNum));
       }
     }
 
-    if(nextDirection == 'R') {  // Right increases number
+    else if(nextDirection == 'R') {  // Right increases number
       currentNum += numClicks;
-      while(currentNum > 99) {
+      while(currentNum > maxValue) {
         currentNum = ((currentNum - 1) - maxValue);
       }
     }
@@ -49,7 +48,7 @@ int main() {
   return 0;
 }
 
-std::pair<char, int> ParseLine(std::string& currentLine) {
+std::pair<char, int> ParseLine(const std::string& currentLine) {
   char letter = currentLine[0];
   int number = std::stoi(currentLine.substr(1));
   return{letter, number};
