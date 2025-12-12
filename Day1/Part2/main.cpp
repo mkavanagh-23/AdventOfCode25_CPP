@@ -13,7 +13,7 @@ int main() {
   std::string currentLine;
 
   // Open the input file
-  std::ifstream input("input.txt");
+  std::ifstream input("../input.txt");
   if(!input) {
     std::cerr << "Could not open input txt file.\n";
     return 1;
